@@ -4,7 +4,7 @@
 
 #include <stdio.h>
 
-#include "generator.h"
+#include "generation/generator.h"
 
 void *hello() {
   printf("Hello, ");
