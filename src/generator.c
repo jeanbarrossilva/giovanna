@@ -8,7 +8,7 @@
 #include "generator.h"
 
 void use_generator(Generation *current, Generator *next, Usage usage) {
-  Generator * generator = malloc(sizeof(Generator));
+  Generator *generator = malloc(sizeof(Generator));
   generator->current = current;
   generator->next = (struct Generator *) next;
   usage(generator);
@@ -16,12 +16,12 @@ void use_generator(Generation *current, Generator *next, Usage usage) {
 }
 
 void generate(Generation generation, Generator *next) {
-  Generator * current = malloc(sizeof(Generator));
+  Generator *current = malloc(sizeof(Generator));
   current->current = generation;
   current->next = (struct Generator *) next;
-  void * last_return = NULL;
+  void *last_return = NULL;
   do {
     last_return = current->current(last_return);
     current = (Generator *) current->next;
-  } while(current != NULL);
+  } while (current != NULL);
 }

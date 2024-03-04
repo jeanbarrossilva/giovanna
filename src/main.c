@@ -6,17 +6,17 @@
 
 #include "generator.h"
 
-void * hello() {
+void *hello() {
   printf("Hello, ");
   return NULL;
 }
 
-void * generateHello(Generator * next) {
+void *generateHello(Generator *next) {
   generate(hello, next);
   return NULL;
 }
 
-void * world() {
+void *world() {
   printf("world!\n");
   return NULL;
 }

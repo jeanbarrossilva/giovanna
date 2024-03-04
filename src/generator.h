@@ -6,7 +6,7 @@
 #define GIOVANNA_GENERATOR_H
 
 /* Method that generates a return value based on the one resulted from a previous generation. */
-typedef void * Generation(void * returned);
+typedef void *Generation(void *returned);
 
 /*
  * Promise-like structure whose generation receives the return value of a previous generation or
@@ -27,7 +27,7 @@ typedef struct {
 } Generator;
 
 /* Method that uses a generator. */
-typedef void * Usage(Generator * generator);
+typedef void *Usage(Generator *generator);
 
 /** Creates a generator that is passed into the given usage and is later deallocated. */
 void use_generator(Generation *current, Generator *next, Usage usage);
@@ -36,5 +36,5 @@ void use_generator(Generation *current, Generator *next, Usage usage);
  * Invokes the given method and runs the generator with the resulting return value, doing the same
  * for the nested ones it might contain until none is found in the chain.
  */
-void generate(Generation generation, Generator * next);
+void generate(Generation generation, Generator *next);
 #endif
