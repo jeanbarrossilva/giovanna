@@ -8,7 +8,7 @@
 
 void * hello() {
   printf("Hello, ");
-  return 0;
+  return NULL;
 }
 
 void * generateHello(Generator * next) {
