@@ -58,8 +58,8 @@ typedef void *Continuation(void *value);
 typedef struct Generator {
   /*
    * Method to be invoked that receives the previously yielded value and continues the execution
-   * chain, with the possibility of it yielding a value to be passed to the next generator's
-   * continuation.
+   * chain, with the possibility of it yielding a value to the next generator's continuation,
+   * enabling such continuity.
    */
   Continuation *continuation;
 
