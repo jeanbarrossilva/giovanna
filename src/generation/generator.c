@@ -23,9 +23,9 @@ void use_generator(Continuation *continuation, Generator *next, Usage usage) {
 
 void generate(Continuation continuation, Generator *next) {
   Generator *current = create_generator(continuation, next);
-  void *yielded = NULL;
+  void *value = NULL;
   do {
-    yielded = current->continuation(yielded);
+    value = current->continuation(value);
     current = (Generator *) current->next;
   } while (current != NULL);
 }
