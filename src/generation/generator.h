@@ -36,7 +36,7 @@ typedef void *Continuation(void *value);
  * =================================================================================================
  *
  * void *hello() {
- *   return "Hello, ";
+ *   return "Hello";
  * }
  *
  * void *generate_hello(Generator *next) {
@@ -45,7 +45,7 @@ typedef void *Continuation(void *value);
  * }
  *
  * void *world(void *value) {
- *   printf("%s world!\n", (char *) value);
+ *   printf("%s, world!\n", (char *) value);
  *   return NULL;
  * }
  *

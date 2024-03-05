@@ -7,7 +7,7 @@
 #include "generation/generator.h"
 
 void *hello() {
-  return "Hello, ";
+  return "Hello";
 }
 
 void *generate_hello(Generator *next) {
@@ -16,7 +16,7 @@ void *generate_hello(Generator *next) {
 }
 
 void *world(void *value) {
-  printf("%s world!\n", (char *) value);
+  printf("%s, world!\n", (char *) value);
   return NULL;
 }
 
