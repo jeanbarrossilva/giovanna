@@ -7,7 +7,7 @@
 
 /*
  * Method that continues a generator execution chain, receiving the value with which the previous
- * continuation has been value.
+ * continuation has been yielded.
  */
 typedef void *Continuation(void *value);
 
