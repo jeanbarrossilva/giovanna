@@ -13,8 +13,8 @@ typedef void *Continuation(void *value);
 
 /*
  * Promise-like structure whose continuation receives the return value of a previous continuation or
- * NULL if there was none prior to it. When it finishes generating, its next generator's
- * continuation is executed.
+ * NULL if there was none prior to it. When it returns, its next generator's continuation is
+ * executed.
  *
  * "Yielding" is extensively referred to in this documentation. Essentially, it just means returning
  * a value from a continuation for it to be passed into another from a generator that follows the
