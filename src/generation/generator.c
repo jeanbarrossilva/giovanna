@@ -28,4 +28,6 @@ void generate(Continuation continuation, Generator *next) {
     value = current->continuation(value);
     current = (Generator *) current->next;
   } while (current != NULL);
+  free(value);
+  free(current);
 }
