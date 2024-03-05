@@ -7,21 +7,21 @@
 
 #include "generator.h"
 
-void use_generator(Generation *current, Generator *next, Usage usage) {
+void use_generator(Continuation *continuation, Generator *next, Usage usage) {
   Generator *generator = malloc(sizeof(Generator));
-  generator->current = current;
+  generator->continuation = continuation;
   generator->next = (struct Generator *) next;
   usage(generator);
   free(generator);
 }
 
-void generate(Generation generation, Generator *next) {
+void generate(Continuation continuation, Generator *next) {
   Generator *current = malloc(sizeof(Generator));
-  current->current = generation;
+  current->continuation = continuation;
   current->next = (struct Generator *) next;
-  void *last_return = NULL;
+  void *yielded = NULL;
   do {
-    last_return = current->current(last_return);
+    yielded = current->continuation(yielded);
     current = (Generator *) current->next;
   } while (current != NULL);
 }

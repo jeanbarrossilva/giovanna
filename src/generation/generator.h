@@ -5,23 +5,44 @@
 #ifndef GIOVANNA_GENERATOR_H
 #define GIOVANNA_GENERATOR_H
 
-/* Method that generates a return value based on the one resulted from a previous generation. */
-typedef void *Generation(void *returned);
+/*
+ * Method that continues a generator execution chain, receiving the value with which the previous
+ * continuation has been value.
+ */
+typedef void *Continuation(void *value);
 
 /*
- * Promise-like structure whose generation receives the return value of a previous generation or
- * NULL if there was none prior to it. When it finishes generating, its next generation is executed.
+ * Promise-like structure whose continuation receives the return value of a previous continuation or
+ * NULL if there was none prior to it. When it finishes generating, its next generator's
+ * continuation is executed.
+ *
+ * "Yielding" is extensively referred to in this documentation. Essentially, it just means returning
+ * a value from a continuation for it to be passed into another from a generator that follows the
+ * first's in the execution chain.
+ *
+ *          -------------------              ---------------------------------------------
+ *         |                   |            |                                             |
+ *         |         1         |            |                      2                      |
+ *         |     GENERATOR     | =========> |                  GENERATOR                  |
+ *         | Returns "Hello, " |            | Prints previously yielded value + " world!" |
+ *         |                   |            |                                             |
+ *          -------------------              ---------------------------------------------
+ *
+ * In the example above, the first generator returns a string to the next whose continuation will be
+ * run, which, in turn, prefixes the message it prints with the value received from the previous
+ * one.
  */
 typedef struct {
   /*
-   * Method to be invoked that receives the return value of the previous Generator's and generates
-   * another for the next Generator.
+   * Method to be invoked that receives the previously yielded value and continues the execution
+   * chain, with the possibility of it yielding a value to be passed to the next generator's
+   * continuation.
    */
-  Generation *current;
+  Continuation *continuation;
 
   /*
-   * Method to be run after the current one, into whose current this one's return value will be
-   * passed.
+   * Generator that will be continued afterward, into whose continuation this one's yielded value
+   * will be passed.
    */
   struct Generator *next;
 } Generator;
@@ -30,11 +51,12 @@ typedef struct {
 typedef void *Usage(Generator *generator);
 
 /** Creates a generator that is passed into the given usage and is later deallocated. */
-void use_generator(Generation *current, Generator *next, Usage usage);
+void use_generator(Continuation *continuation, Generator *next, Usage usage);
 
 /*
- * Invokes the given method and runs the generator with the resulting return value, doing the same
- * for the nested ones it might contain until none is found in the chain.
+ * Invokes the given continuation and runs the next generator with the initially yielded value,
+ * doing the same for the nested ones it might point to until none is found in the execution chain.
  */
-void generate(Generation generation, Generator *next);
+void generate(Continuation continuation, Generator *next);
+
 #endif
