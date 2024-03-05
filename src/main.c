@@ -11,7 +11,7 @@ void *hello() {
   return NULL;
 }
 
-void *generateHello(Generator *next) {
+void *generate_hello(Generator *next) {
   generate(hello, next);
   return NULL;
 }
@@ -22,6 +22,6 @@ void *world() {
 }
 
 int main() {
-  use_generator(world, NULL, generateHello);
+  use_generator(world, NULL, generate_hello);
   return 0;
 }
