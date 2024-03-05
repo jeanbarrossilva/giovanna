@@ -18,19 +18,42 @@ typedef void *Continuation(void *value);
  *
  * "Yielding" is extensively referred to in this documentation. Essentially, it just means returning
  * a value from a continuation for it to be passed into another from a generator that follows the
- * first's in the execution chain.
+ * previous one in the execution chain.
  *
- *          -------------------              ---------------------------------------------
- *         |                   |            |                                             |
- *         |         1         |            |                      2                      |
- *         |     GENERATOR     | =========> |                  GENERATOR                  |
- *         | Returns "Hello, " |            | Prints previously yielded value + " world!" |
- *         |                   |            |                                             |
- *          -------------------              ---------------------------------------------
+ *      -------------------              -----------------------------------------------------
+ *     |                   |            |                                                     |
+ *     |         1         |            |                          2                          |
+ *     |     GENERATOR     | ---------> |                      GENERATOR                      |
+ *     | Returns "Hello, " |            | Prints value from previous continuation + " world!" |
+ *     |                   |            |                                                     |
+ *      -------------------              -----------------------------------------------------
  *
- * In the example above, the first generator returns a string to the next whose continuation will be
- * run, which, in turn, prefixes the message it prints with the value received from the previous
- * one.
+ * In the example above, the first generator returns a string to the next, whose continuation will
+ * be run and, in turn, prefix the message it prints with the value received from the previous one.
+ * Actually chaining these generators would be implemented as something like this, and, at the end,
+ * "Hello, world!\n" would get printed out:
+ *
+ * =================================================================================================
+ *
+ * void *hello() {
+ *   return "Hello, ";
+ * }
+ *
+ * void *generate_hello(Generator *next) {
+ *   generate(hello, next);
+ *   return NULL;
+ * }
+ *
+ * void *world(void *value) {
+ *   printf("%s world!\n", (char *) value);
+ *   return NULL;
+ * }
+ *
+ * int main() {
+ *   use_generator(world, NULL, generate_hello);
+ * }
+ *
+ * =================================================================================================
  */
 typedef struct Generator {
   /*
@@ -40,22 +63,19 @@ typedef struct Generator {
    */
   Continuation *continuation;
 
-  /*
-   * Generator that will be continued afterward, into whose continuation this one's yielded value
-   * will be passed.
-   */
+  // Generator that will be continued with the value returned by this one's continuation afterward.
   struct Generator *next;
 } Generator;
 
-/* Method that uses a generator. */
+// Method that uses a generator.
 typedef void *Usage(Generator *generator);
 
 /** Creates a generator that is passed into the given usage and is later deallocated. */
 void use_generator(Continuation *continuation, Generator *next, Usage usage);
 
 /*
- * Invokes the given continuation and runs the next generator with the initially yielded value,
- * doing the same for the nested ones it might point to until none is found in the execution chain.
+ * Invokes the given continuation and runs the next generator's with the initially returned value,
+ * doing the same for the nested ones it might point to until none is left in the execution chain.
  */
 void generate(Continuation continuation, Generator *next);
 
