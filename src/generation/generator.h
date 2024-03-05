@@ -32,7 +32,7 @@ typedef void *Continuation(void *value);
  * run, which, in turn, prefixes the message it prints with the value received from the previous
  * one.
  */
-typedef struct {
+typedef struct Generator {
   /*
    * Method to be invoked that receives the previously yielded value and continues the execution
    * chain, with the possibility of it yielding a value to be passed to the next generator's
