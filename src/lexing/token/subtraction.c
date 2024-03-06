@@ -4,6 +4,7 @@
 
 #include <stdio.h>
 
+#include "../tokenizer.h"
 #include "numeric.h"
 #include "subtraction.h"
 
@@ -20,7 +21,7 @@ static Token *create_subtraction_token() {
   return create_token(SUBTRACTION_TOKEN_NAME, SUBTRACTION_TOKEN_VALUE, NUMERIC_TOKEN_NAME);
 }
 
-Token *maybe_tokenize_as_subtraction(char *value) {
+void *maybe_tokenize_as_subtraction(char *value) {
   if (is(value, SUBTRACTION_TOKEN_VALUE)) {
     return create_subtraction_token();
   } else {

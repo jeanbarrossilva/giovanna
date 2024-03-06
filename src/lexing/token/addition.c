@@ -4,6 +4,7 @@
 
 #include <stdio.h>
 
+#include "../tokenizer.h"
 #include "addition.h"
 #include "numeric.h"
 
@@ -20,7 +21,7 @@ static Token *create_addition_token() {
   return create_token(ADDITION_TOKEN_NAME, ADDITION_TOKEN_VALUE, NUMERIC_TOKEN_NAME);
 }
 
-Token *maybe_tokenize_as_addition(char *value) {
+void *maybe_tokenize_as_addition(char *value) {
   if (is(value, ADDITION_TOKEN_VALUE)) {
     return create_addition_token();
   } else {

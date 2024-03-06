@@ -3,7 +3,9 @@
 //
 
 #include <ctype.h>
+#include <stdbool.h>
 
+#include "../tokenizer.h"
 #include "addition.h"
 #include "numeric.h"
 #include "subtraction.h"
@@ -28,7 +30,7 @@ static Token *create_numeric_token(const char *value) {
   return create_token(NUMERIC_TOKEN_NAME, value, next);
 }
 
-Token *maybe_tokenize_as_numeric(char *value) {
+void *maybe_tokenize_as_numeric(char *value) {
   if (is_numeric(value)) {
     return create_numeric_token(value);
   } else {
