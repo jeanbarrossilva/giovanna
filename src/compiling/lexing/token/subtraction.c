@@ -8,8 +8,6 @@
 #include "numeric.h"
 #include "subtraction.h"
 
-static const char *SUBTRACTION_TOKEN_NAME = "subtraction";
-
 // Value of a subtraction token.
 static const char *SUBTRACTION_TOKEN_VALUE = "menos";
 

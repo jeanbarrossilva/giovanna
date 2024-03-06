@@ -8,8 +8,6 @@
 #include "addition.h"
 #include "numeric.h"
 
-static const char *ADDITION_TOKEN_NAME = "addition";
-
 // Value of an addition token.
 static const char *ADDITION_TOKEN_VALUE = "mais";
 

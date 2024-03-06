@@ -15,13 +15,13 @@ static const short TOKEN_COUNT = 3;
 // String that indicates the end of a token and possibly the beginning of another one.
 static const char *DELIMITER = " ";
 
-// Counts the amount of times the delimiter appears in the string.
-static unsigned long count_delimiters(const char *string) {
-  int index, count;
-  for (index = 0, count = 0; string[index]; index++) {
-    count += (string[index] == *DELIMITER);
+// Counts the amount of times a value that may be that of a token appears in the string.
+static unsigned long count_potential_token_values(const char *string) {
+  int delimiter_index, delimiter_count;
+  for (delimiter_index = 0, delimiter_count = 0; string[delimiter_index]; delimiter_index++) {
+    delimiter_count += (string[delimiter_index] == *DELIMITER);
   }
-  return count;
+  return delimiter_count + 1;
 }
 
 // Creates a token that best suits the given delimited value extracted from an expression.
@@ -43,16 +43,16 @@ bool is(const char *first, const char *second) {
 
 Token *create_token(const char *name, const char *value, const char *next) {
   Token *token = malloc(sizeof(Token));
-  token->name = strdup(name);
-  token->value = strdup(value);
-  token->next = strdup(next);
+  token->name = name;
+  token->value = value;
+  token->next = next;
   return token;
 }
 
 Token *tokenize(char *expression) {
   char *_expression = strdup(expression);
-  char *value;
-  Token *tokens = malloc(sizeof(Token) * count_delimiters(expression));
+  char *value = NULL;
+  Token *tokens = malloc(sizeof(Token) * count_potential_token_values(expression));
   unsigned long index = 0;
   while ((value = strsep(&_expression, DELIMITER))) {
     Token *token = tokenize_value(value);
