@@ -20,7 +20,7 @@ static Token *create_subtraction_token() {
   return create_token(SUBTRACTION_TOKEN_NAME, SUBTRACTION_TOKEN_VALUE, NUMERIC_TOKEN_NAME);
 }
 
-void *maybe_tokenize_as_subtraction(char *value) {
+Token *maybe_tokenize_as_subtraction(char *value) {
   if (is(value, SUBTRACTION_TOKEN_VALUE)) {
     return create_subtraction_token();
   } else {

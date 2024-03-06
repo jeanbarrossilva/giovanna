@@ -11,6 +11,6 @@
 const char *SUBTRACTION_TOKEN_NAME;
 
 // Creates a subtraction token with the given value if it is a match.
-void *maybe_tokenize_as_subtraction(char *value);
+Token *maybe_tokenize_as_subtraction(char *value);
 
 #endif
