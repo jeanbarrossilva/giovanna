@@ -10,7 +10,7 @@
 #include "numeric.h"
 #include "subtraction.h"
 
-const char *NUMERIC_TOKEN_NAME = "numeric";
+static const char *NUMERIC_TOKEN_NAME = "numeric";
 
 // Whether all characters within the string are numeric. Returns false if it is empty.
 static bool is_numeric(char *string) {

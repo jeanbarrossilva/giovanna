@@ -6,7 +6,7 @@
 #define GIOVANNA_SRC_LEXING_TOKEN_NUMERIC_H_
 
 // Name of a token whose value is a number.
-const char *NUMERIC_TOKEN_NAME;
+static const char *NUMERIC_TOKEN_NAME;
 
 // Creates a numeric token with the given value if it is a match.
 void *maybe_tokenize_as_numeric(char *value);

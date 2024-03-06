@@ -6,7 +6,7 @@
 #define GIOVANNA_SRC_LEXING_TOKEN_SUBTRACTION_H_
 
 // Name of a subtraction token.
-const char *SUBTRACTION_TOKEN_NAME;
+static const char *SUBTRACTION_TOKEN_NAME;
 
 // Creates a subtraction token with the given value if it is a match.
 void *maybe_tokenize_as_subtraction(char *value);
