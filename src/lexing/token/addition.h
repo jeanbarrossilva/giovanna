@@ -2,8 +2,6 @@
 // Created by Jean Barros Silva on 04/03/24.
 //
 
-#include <stdio.h>
-
 #include "../tokenizer.h"
 
 #ifndef GIOVANNA_SRC_LEXING_TOKEN_ADDITION_H_

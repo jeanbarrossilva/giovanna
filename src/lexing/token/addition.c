@@ -4,7 +4,7 @@
 
 #include <stdio.h>
 
-#include "../tokenizer.h"
+#include "addition.h"
 #include "numeric.h"
 
 // Value of an addition token.

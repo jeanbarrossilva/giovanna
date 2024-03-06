@@ -4,8 +4,8 @@
 
 #include <ctype.h>
 
-#include "../tokenizer.h"
 #include "addition.h"
+#include "numeric.h"
 #include "subtraction.h"
 
 const char *NUMERIC_TOKEN_NAME = "numeric";
