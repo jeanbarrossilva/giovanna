@@ -26,7 +26,7 @@ static unsigned long count_delimiters(const char *string) {
 
 // Creates a token that best suits the given delimited value extracted from an expression.
 static Token *tokenize_value(char *value) {
-  void **strategies = malloc(sizeof(Continuation) * TOKEN_COUNT);
+  void **strategies = malloc(sizeof(Token *) * TOKEN_COUNT);
   strategies[0] = maybe_tokenize_as_addition(value);
   strategies[1] = maybe_tokenize_as_numeric(value);
   strategies[2] = maybe_tokenize_as_subtraction(value);

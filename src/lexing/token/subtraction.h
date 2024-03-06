@@ -5,7 +5,6 @@
 #ifndef GIOVANNA_SRC_LEXING_TOKEN_SUBTRACTION_H_
 #define GIOVANNA_SRC_LEXING_TOKEN_SUBTRACTION_H_
 
-#include "../generation/generator.h"
 #include "../tokenizer.h"
 
 // Name of a subtraction token.

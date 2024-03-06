@@ -4,7 +4,6 @@
 
 #include <stdio.h>
 
-#include "../generation/generator.h"
 #include "../tokenizer.h"
 
 #ifndef GIOVANNA_SRC_LEXING_TOKEN_ADDITION_H_
