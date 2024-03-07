@@ -5,8 +5,8 @@
 #include "compiling/compiler.h"
 #include "compiling/lexing/tokenizer.h"
 
-int main() {
-  Token *tokens = tokenize("2 mais 1");
+int main(int _, char **argv) {
+  Token *tokens = tokenize(argv[1]);
   int exit_code = compile(tokens);
   free(tokens);
   return exit_code;
