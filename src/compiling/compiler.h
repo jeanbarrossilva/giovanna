@@ -17,7 +17,7 @@ static const int UNEXPECTED_NUMERIC_TOKEN = -1;
  * Exit code that indicates that either an addition or subtraction token has been provided when a
  * numeric one was expected.
  */
-static const int UNEXPECTED_ARITHMETIC_TOKEN = -2;
+static const int UNEXPECTED_OPERATION_TOKEN = -2;
 
 // Compiles a giovanna script.
 int compile(Token *tokens);

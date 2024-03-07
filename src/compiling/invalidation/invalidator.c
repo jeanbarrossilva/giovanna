@@ -5,7 +5,7 @@
 #include "../lexing/token/numeric.h"
 #include "invalidator.h"
 
-bool is_initial_token_arithmetic(Token *previous_token, const char *current_token_name) {
+bool is_initial_token_that_of_an_operation(Token *previous_token, const char *current_token_name) {
   return previous_token == NULL && current_token_name != NUMERIC_TOKEN_NAME;
 }
 
